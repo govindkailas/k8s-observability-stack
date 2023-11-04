@@ -1,6 +1,6 @@
 # The Observability Stack for Kubernetes.
 
-All bells and whistles included an observability stack for Kubernetes. 
+All bells and whistles included observability stack for Kubernetes. 
 * [Kube-Prometheus](https://github.com/prometheus-operator/kube-prometheus#kube-prometheus) the Kubernetes monitoring stack
   * [Prometheus](https://github.com/prometheus/prometheus) to collect metrics
   * [AlertManager](https://github.com/prometheus/alertmanager#alertmanager-) to fire the alerts
