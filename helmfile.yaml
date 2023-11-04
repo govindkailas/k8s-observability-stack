@@ -6,20 +6,26 @@ repositories:
   - name: grafana
     url: https://grafana.github.io/helm-charts
 
+## Namespace to which the helm charts will be installed.
 namespace: observability
 
 releases:
-  # Prometheus, Grafana
+  # Prometheus, Grafana ## More details here https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/README.md
   - name: kube-prometheus-stack
     chart: prometheus-community/kube-prometheus-stack
     values:
       - values/kube-prometheus-stack.yaml.gotmpl
 
-  # Loki, Promtail
+  # Loki, Promtail ## 
   - name: loki-stack
     chart: grafana/loki-stack
     values:
       - values/loki-stack.yaml.gotmpl
+  # Tempo
+  - name: tempo
+    chart: grafana/tempo
+    values:
+      - values/tempo.yaml.gotmpl
 
-values:
-  - .env.{{ .Environment.Name }}.yaml
+# values:
+#   - .env.{{ .Environment.Name }}.yaml
