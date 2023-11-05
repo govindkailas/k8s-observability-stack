@@ -11,7 +11,7 @@ All bells and whistles included observability stack for Kubernetes.
 * [Loki](https://github.com/grafana/loki) for the logs
 * [Tempo](https://github.com/grafana/tempo) distributed tracing 
 
-For a quick start, run `helmfile apply`. In the `helmfile.yaml` is a template for the helm deployments. This can be modified to suit your needs.
+For a quick start, run `helmfile apply`. The [helmfile.yaml](helmfile.yaml) is a template for the helm deployments. This can be modified to suit your needs.
 
 ## Notes
 
