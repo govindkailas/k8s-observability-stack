@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ labels:
+   app: hotrod
+ name: hotrod
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     app: hotrod
+ template:
+   metadata:
+     labels:
+       app: hotrod
+   spec:
+     containers:
+       - args:
+           - all
+         env:
+           - name: OTEL_EXPORTER_JAEGER_AGENT_HOST
+             value: tempo.observability
+           - name: OTEL_EXPORTER_JAEGER_AGENT_PORT
+             value: '6831'
+           - name: OTEL_EXPORTER_OTLP_ENDPOINT  
+             value: http://tempo.observability:4318
+         image: jaegertracing/example-hotrod:latest
+         name: hotrod
+         ports:
+           - containerPort: 8080
+         resources: 
+          limits:
+            memory: 512Mi
+            cpu: 200m  
+     restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+ labels:
+   app: hotrod
+ name: hotrod
+spec:
+ ports:
+   - name: 'http'
+     port: 80
+     targetPort: 8080
+ selector:
+   app: hotrod
+ type: LoadBalancer # or ClusterIP if LB is not supported      
