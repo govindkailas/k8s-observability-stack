@@ -32,6 +32,12 @@ To delete the observability stack,
 helmfile delete
 ```
 
-This will not clean up all the crds created, [please refer](https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/README.md)  on how to delete all the crds.
+This will not clean up all the crds created, [please refer](https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/README.md)  on how to delete all the cards.
+
+## Distributed Tracing straight from the Loki logs to Tempo
 
 ![image](https://github.com/govindkailas/k8s-observability-stack/assets/6698224/f129e7d3-1e66-4ce4-b488-7ebb70e22926)
+
+## Datasources in Grafana
+![image](https://github.com/govindkailas/k8s-observability-stack/assets/6698224/90b9ffe1-0f24-494d-ae71-bff2a54e4fc0)
+
