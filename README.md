@@ -16,8 +16,8 @@ For a quick start, run `helmfile apply`. The [helmfile.yaml](helmfile.yaml) is a
 ## Notes
 
 ## Prerequisites
-1. Install helmfile, ref, https://github.com/helmfile/helmfile 
-2. Install helm-diff by running `helm plugin install https://github.com/databus23/helm-diff`
+1. Install `helmfile`, ref, https://github.com/helmfile/helmfile 
+2. Install `helm-diff` by running `helm plugin install https://github.com/databus23/helm-diff`
 
 If you encounter 'no matches for kind' errors when applying helmfile,
 use `--skip-diff-on-install` flag to bypass the initial diff when running apply:
@@ -26,7 +26,9 @@ helmfile apply --skip-diff-on-install
 ```
 
 
-This should bring up grafana, prometheus, loki and tempo. We are also adding the extra datasource like loki and tempo to grafana from [values/kube-prometheus-stack.yaml.gotmpl](values/kube-prometheus-stack.yaml.gotmpl). 
+This should bring up `Grafana`, `Prometheus`, `Loki` and `Tempo`. 
+The Grafana from `kube-prometheus` stack will by default have the `Prometheus` and `Alert-manager` data sources enabled.
+We are also adding the extra datasource for `Loki` and `Tempo` to `Grafana` from [values/kube-prometheus-stack.yaml.gotmpl](values/kube-prometheus-stack.yaml.gotmpl). 
 
 Ideally, if everything is good, we should see the below services,
 ```
@@ -34,7 +36,6 @@ k get svc
 NAME                      TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)                                                                                                   AGE
 alertmanager-operated     ClusterIP      None            <none>         9093/TCP,9094/TCP,9094/UDP                                                                                3d16h
 grafana                   LoadBalancer   10.43.86.20     10.96.194.35   80:30205/TCP                                                                                              3d16h
-hotrod                    ClusterIP      10.43.19.246    <none>         8080/TCP                                                                                                  3d22h
 kube-state-metrics        ClusterIP      10.43.91.244    <none>         8080/TCP                                                                                                  3d16h
 loki                      ClusterIP      10.43.204.28    <none>         3100/TCP                                                                                                  3d16h
 loki-headless             ClusterIP      None            <none>         3100/TCP                                                                                                  3d16h
@@ -49,13 +50,14 @@ tempo                     ClusterIP      10.43.66.58     <none>         3100/TCP
 
 Grafana can be accessed with the loadbalancer ip, if your cluster doesn't support LoadBalancer, you can always port forward the grafana service/pod.
 
+ We will have to add the data sources for `Loki` and `Tempo`, take a look at 
 
 _Note_:
 _if the alert manager and prometheus pods are going to restart the loop, it's most likely that you have prometheus already running in the cluster. You will have to delete those._
 
 
 ## Tracing with Hot R.O.D
-Hotrod is a popular demo app that uses OpenTracing API, you may find [more details about the app here](https://github.com/uber/jaeger/tree/main/examples/hotrod)
+`Hotrod` is a popular demo app that uses OpenTracing API, you may find [more details about the app here](https://github.com/uber/jaeger/tree/main/examples/hotrod)
 For the demo, let's deploy it to the same namespace, 
 ```
 k apply -f hotrod-sample-app.yml
@@ -73,7 +75,7 @@ service/hotrod   LoadBalancer   10.43.209.194   10.96.196.137   80:30743/TCP   3
 
 ```
 
-Access the Hotrod using loadbalancer ip or port-forward to your local. Click on a few rides from the UI and head over to Grafana. Go to explore view and select Loki as the data source, from the filer use _app=hotrod_
+Access the Hotrod using loadbalancer ip or `port-forward` to your local. Click on a few rides from the UI and head over to Grafana. Go to explore view and select Loki as the data source, from the filer use _app=hotrod_
 
 ## Distributed Tracing straight from the Loki logs to Tempo
 
