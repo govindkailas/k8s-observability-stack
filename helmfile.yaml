@@ -6,6 +6,11 @@ repositories:
   - name: grafana
     url: https://grafana.github.io/helm-charts
 
+  # Enable Cortex if needed  
+  # Cortex https://github.com/cortexproject/cortex-helm-chart
+  # - name: cortex-helm
+  #   url: https://cortexproject.github.io/cortex-helm-chart
+
 ## Namespace to which the helm charts will be installed.
 namespace: observability
 
@@ -26,6 +31,9 @@ releases:
     chart: grafana/tempo
     values:
       - values/tempo.yaml.gotmpl
-
+ 
+  # # Cortex
+  # - name: cortex
+  #   chart: cortex-helm/cortex
 # values:
 #   - .env.{{ .Environment.Name }}.yaml
